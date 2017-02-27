@@ -1,0 +1,3 @@
+[submodule "digits"]
+	path = digits
+	url = git@github.com:NVIDIA/DIGITS.git
