@@ -2,6 +2,13 @@
 FROM kaixhin/cuda-digits-deps:8.0
 MAINTAINER Huaming Rao <huaming.rao@gmail.com>
 
+# Clone DIGITS repo and move into it
+#RUN cd /root && git clone --depth 1 https://github.com/NVIDIA/DIGITS.git digits && cd digits && \
+# pip install
+#  pip install -r requirements.txt
+COPY ./digits /root/digits
+RUN cd /root/digits/ && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt && rm -rf /root/.cache
+
 # Move into NVIDIA Caffe repo
 RUN cd /root/caffe && \
 # Make and move into build directory
@@ -12,14 +19,6 @@ RUN cd /root/caffe && \
   make -j"$(nproc)"
 # Set CAFFE_HOME
 ENV CAFFE_HOME /root/caffe
-
-# Clone DIGITS repo and move into it
-#RUN cd /root && git clone --depth 1 https://github.com/NVIDIA/DIGITS.git digits && cd digits && \
-# pip install
-#  pip install -r requirements.txt
-
-COPY ./digits /root/digits
-RUN cd /root/digits/ && pip install -r requirements.txt
 
 # Expose server port
 EXPOSE 5000
