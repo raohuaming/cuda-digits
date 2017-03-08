@@ -14,7 +14,7 @@ RUN cd /root/caffe && \
 # Make and move into build directory
   mkdir build && cd build && \
 # CMake
-  cmake .. -DCUDA_ARCH_NAME=Manual -DCUDA_ARCH_BIN="61" -DCUDA_ARCH_PTX="61" -DUSE_CUDNN=1  && \
+  cmake .. -DCUDA_ARCH_NAME=Manual -DCUDA_ARCH_BIN="50 61" -DCUDA_ARCH_PTX="50 61" -DUSE_CUDNN=1  && \
 # Make
   make -j"$(nproc)"
 # Set CAFFE_HOME
